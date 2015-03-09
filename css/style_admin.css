@@ -1,0 +1,42 @@
+/** LOGIN **/
+
+body{
+	background-image: url('../imagens/bg-painel.jpg');
+	background-repeat: no-repeat;
+	background-position: center center;
+    background-attachment: fixed;
+	background-size: cover;
+}
+
+.barra{
+	background-color:#999;
+	opacity: 0.4;
+	padding:15px;
+}
+
+.barra h1{
+	color:#000;
+	font-size: 1.5em;
+	margin:0;
+}
+
+.login{
+	margin:50px auto;
+	max-width:340px;
+	border:1px solid #CCC;
+	padding:20px;
+	background-color:rgba(0, 0, 0, 0.5)
+
+}
+
+.login input[name="password"]{
+	margin-top:5px;
+}
+
+.login button{
+	margin:5px auto;
+}
+
+.login h2{
+	color:#FFF;
+}
