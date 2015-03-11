@@ -5,7 +5,34 @@ require_once 'conexaoDB.php';
 
 $conecta = conexaoDB(); // ta vindo no require
 
+//DELETANDO USUARIOS
+echo "DELETANDO USUARIOS!<br>";
+$conecta->query("DROP TABLE IF EXISTS users");
+echo "/\OK/\\<br>";
 
+echo "CRIANDO TABELA USUARIOS COM MESMOS CAMPOS!<br>";
+$conecta->query("CREATE TABLE users(
+	id INT NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50),
+	password VARCHAR(255),
+	PRIMARY KEY (id)
+	);
+");
+echo "/\OK/\\<br>";
+
+echo "INSERINDO USUARIOS!<br>";
+$usuario  = "demo";
+$password = "mudar123";
+$pass_cript = password_hash($password, PASSWORD_DEFAULT);
+
+$sqlUsers = "INSERT INTO users(username, password) VALUES(:usuario, :senha)";
+$stmts = $conecta->prepare($sqlUsers);
+$stmts->bindValue(":usuario", $usuario);
+$stmts->bindValue(":senha", $pass_cript);
+$stmts->execute();
+
+echo "usuario cadastrado!<br>";
+echo "/\OK/\\<br>";
 
 //DELETANDO OS DADOS DA 
 echo "DELETANDO! <br>";
@@ -296,8 +323,8 @@ $sql = "INSERT INTO paginas(titulo, pagina, conteudo) VALUES(:titulo, :pagina, :
 
 $stmt = $conecta->prepare($sql);
 $stmt->bindValue(":titulo", $titulo);
-$stmt->bindValue("pagina", $pagina);
-$stmt->bindValue("conteudo", $conteudo);
+$stmt->bindValue(":pagina", $pagina);
+$stmt->bindValue(":conteudo", $conteudo);
 $stmt->execute();
 
 $paginas[] = $pagina;

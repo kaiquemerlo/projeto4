@@ -1,3 +1,15 @@
+<?php
+if(!isset($_SESSION)){
+session_start();
+}
+
+if(isset($_GET['acao'])){ //caso tenha clicado em sair destroy as sessoes existentes;
+	session_destroy();
+}elseif(isset($_SESSION['logado'])){ // caso ja exista a sessão(ja esta logado) entao entra na pagina restrita
+	header('Location: painel.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -10,7 +22,7 @@
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<title>Painel administrativo</title>
 </head>
-<body>
+<body>	
 	
 
 <div class="container-fluid barra">

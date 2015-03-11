@@ -40,3 +40,24 @@ body{
 .login h2{
 	color:#FFF;
 }
+
+
+/*PAINEL*/
+
+.menu-admin{
+	max-width: 1000px;
+	margin:15px auto;
+}
+
+.menu-admin ul li{
+	display: inline;
+}
+
+.box{
+	background-color: #FFF;
+}
+
+.btn-salvar{
+	float:left;
+	margin:15px 0;
+}

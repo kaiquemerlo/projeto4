@@ -3,37 +3,38 @@
 
 // $usuario  = string com o que foi postado em user
 // $password = string com o que foi postado em password
+
 function validaUserSessao($user, $password, $conecta){
 
-$sql = "SELECT * FROM users WHERE username = :user AND password = :password";
+
+$sql = "SELECT * FROM users WHERE username = :user";
 $stmt = $conecta->prepare($sql);
 $stmt->bindValue(':user', $user);
-$stmt->bindValue('password', $password);
 $stmt->execute();
 
 $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$user_validate = $resultado['username'];
-$pass_validade = $resultado['password'];
-
-if(isset($user) and isset($password)){
-	if($user == $user_validate and $password == $pass_validade){
+if($resultado){
+	if(password_verify($password, $resultado['password'])){
 		$_SESSION['logado'] = true;
 	}
 }
 
-if(!isset($_SESSION['logado'])){
-	require_once'erro.php';
+if(!isset($_SESSION['logado']) || $_SESSION['logado'] != true){
+	require_once'index.php';
 	die();
 }
 }
 
-if(isset($_SESSION['logado'])){
-	$autentica = $_SESSION['logado'];
-}
-function validaUserPagina($autentica){
+
+function validaUserPagina(){
+	if(isset($_SESSION['logado'])){
+		$autentica = $_SESSION['logado'];
+	}else{
+		$autentica = null;
+	}
 	if(!isset($autentica) || $autentica == false){
-		require_once 'erro.php';
+		require_once 'index.php';
 		die();
 	}
 }
